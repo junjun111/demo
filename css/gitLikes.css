@@ -1,0 +1,33 @@
+/* get likes 模块 */
+.postBox{
+	width:100%;
+	display: flex;
+	flex-flow:column;
+	justify-content: center;
+	align-items: center;
+}
+.bg_triangle{
+	background: url(../img/b_like_67.png) no-repeat;
+	width:0.1rem;
+	height:0.05rem;
+	background-size: 100% 100%;
+}
+.post_news{
+	width:1.5rem;
+	height:0.3rem;
+	background:#fff;
+	border-radius: 0.05rem;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 0.15rem;
+}
+.addlike,.addcomment{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#post_like,#post_comment{
+	font-size: 0.14rem;
+	color:#6273f4;
+	padding-left:0.05rem;
+}

@@ -6,7 +6,9 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link href="css/mui.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper-3.4.2.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/getFollowers.css"/>
+    <link rel="stylesheet" type="text/css" href="css/gitLikes.css"/>
     <style type="text/css">
     	.mui-content{
 			  background-image: url(img/b_like_1.png);
@@ -17,6 +19,33 @@
 		.mui-popover .mui-popover-arrow:after {
 			position: static;
 		}
+		.swiper-container{
+			display: none;
+			width:100%;
+			height:1rem;
+		}
+		.swiper-slide {
+	      display: -webkit-box;
+	      display: -ms-flexbox;
+	      display: -webkit-flex;
+	      display: flex;
+	      -webkit-box-pack: center;
+	      -ms-flex-pack: center;
+	      -webkit-justify-content: center;
+	      justify-content: center;
+	      -webkit-box-align: center;
+	      -ms-flex-align: center;
+	      -webkit-align-items: center;
+	      align-items: center;
+	      /*width: 0.74rem;*/
+	    }
+	    .smallW{
+	    	width:0.74rem;
+	    }
+	    .addW{
+	    	width:1rem;
+	    }
+	    
     </style>
 </head>
 <body>
@@ -28,7 +57,7 @@
       <div class="mui-scroll-wrapper">
         <div class="mui-scroll">
           <!-- 菜单具体展示内容 -->
-         <!--<header class="mui-bar mui-bar-nav">
+         <header class="mui-bar mui-bar-nav">
              <a class="mui-icon mui-icon-forward mui-pull-right"></a>
              <h1 class="mui-title">Setting</h1>
          </header>
@@ -68,7 +97,7 @@
                  	</div>
                      <a class="mui-navigate-right"></a>
                  </li>
-             </ul>-->
+             </ul>
         </div>
       </div>
     </aside>
@@ -84,17 +113,33 @@
 	    	  <h1 class="white nomal_txt userName" style="width:100%;text-align: center;margin-right:0.3rem">111</h1>
 	       </div>        
 			<div class="user_img">
-				<div class="followers">
+				<!--<div class="followers">
 						<span class="big_txt follower_count  white"></span>
 						<span class="smallTxt white"></span>
-				</div>
+				</div>-->
 				<a href="#popover" id="openPopover"><img id="user_imgUrl" src="img/b_like_35.png"/></a>
-				<div class="following">
+				<!--<div class="following">
 						<span class="big_txt following_count white"></span>
 						<span class="smallTxt white"></span>
-				</div>
+				</div>-->
+				<div class="swiper-container">
+				    <div class="swiper-wrapper">	   
+				      
+				    </div>
+				 </div>	
 			</div>
-			<p class="text_middle">点击登录instagram享受优惠</p>
+			<div class="postBox">
+				<div class="bg_triangle"></div>
+					<div class="post_news">
+						<div class="addlike">
+							<img src="img/b_like_82.png" style="width:0.16rem" /><span id="post_like">100</span>
+						</div>
+						<div class="addcomment">
+							<img src="img/b_like_81.png" style="width:0.16rem" /><span id="post_comment">100</span>
+						</div>
+				   </div>
+			</div>
+			
 		</div>
 		<div id="sec">
 	    	<div class="time_active">
@@ -107,10 +152,10 @@
 	    		</div>
 	    	</div>
 	    	<div class="add">
-	    		<div class="add_F">
-	    			<span id="follower"><a href="javascript:void(0);">Followers</a></span>
-	    			<span id="Gfollower"><a href="javascript:void(0);">Golden Followers</a></span>
-	    		</div>
+	    		<!--<div class="add_F">
+	    			<span id="follower"><a href="javascript:void(0);">Likes</a></span>
+	    			<span id="Gfollower"><a href="javascript:void(0);">Golden Likes</a></span>
+	    		</div>-->
 	    		<div class="load_follower">
 	    			
 	    		</div>
@@ -165,7 +210,7 @@
     		<img src="img/b_like_13.png" style="width:0.2rem;display: block;" />
     		<span>Get Followers</span>
     	</a>
-    	<a class="middle getLike" href="getLikes.html">
+    	<a class="middle" href="">
     		<img src="img/b_like_82.png" style="width:0.2rem;display: block;" />
     		<span>Get Likes</span>
     	</a>
@@ -194,51 +239,85 @@
 		    <p class="red warn">This account is invalid,please re-enter</p>
 		    <button type="button" class="mui-btn mui-btn-primary">Next</button>
 		    <img src='img/loadani.gif' class="load_img"/>
-	    </div>  
+	    </div>
 </div>
 </body>
 <script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/puplic.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/loading_ajax.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/swiper-3.4.2.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
     mui.init({
 			swipeBack: false,
 		});
 	mui.ready(function(){
+		
 		//先清空在加载
    		$(".load_follower").html("");
 		//加载服务器数据
-		loaddingAjax();
+		Mlikes();
 		
 		//点击加载相应数据
-	    mui('.add_F').on('tap','#Gfollower',function(){
-	  	//先清空在加载
-	    $(".load_follower").html("");
-	  	Gfollowers();
-	  })
-	  mui('.add_F').on('tap','#follower',function(){
-	  	//先清空在加载
-	    $(".load_follower").html("");
-	  	Mfollowers();
-	  })
+
 		//加载本地数据
 		var data = JSON.parse(localStorage.getItem('data'));
-	    console.log(data);
+	    //console.log(data);
 	    
 	    //获取数据
 	    if(data){
-	    	var img_url = data.entry_data.ProfilePage[0].graphql.user.profile_pic_url;
+	    	//展示数据
+	    	$('.swiper-container').css("display","block");
+	    	$('#openPopover').css("display","none");
+	    	var numImg = data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges;
+	    	var imgSrc = numImg[0].node.display_resources[0].src;
+	    	var post_like = numImg[0].node.edge_liked_by.count;
+	    	var post_comment = numImg[0].node.edge_media_to_comment.count;
 		    var userName = data.entry_data.ProfilePage[0].graphql.user.username;
-		    var followers = data.entry_data.ProfilePage[0].graphql.user.edge_followed_by.count;
-		    var following = data.entry_data.ProfilePage[0].graphql.user.edge_follow.count;
-		    //var post = data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.count;
 			
 			//页面赋值，加载用户信息
 			$(".userName").html(userName);
-			$('#user_imgUrl').attr("src",img_url);
-			$(".follower_count").html(followers);
-	        $(".following_count").html(following);
+			
+			//加载第一张帖子信息
+			$("#post_like").html(post_like);
+			$("#post_comment").html(post_comment);
+	        
+	        //循环创建图片节点
+	        for (var i = 0;i < numImg.length;i++) {
+	        	var imgSrc = numImg[i].node.display_resources[0].src;
+	        	var slide = '<div class="swiper-slide"><img src="'+imgSrc+'" class="smallW"/></div>';
+	        	
+	        	//动态添加发帖信息
+	        	$(".swiper-wrapper").append(slide);  	
+	        }
+	        
+	        //swiper轮播插件
+			    var mySwiper = new Swiper('.swiper-container', {
+			      slidesPerView: '3',
+			      centeredSlides: true,
+			      spaceBetween: 20,
+			      onSlideChangeStart: function(swiper){
+			      	//获取当前活动板块索引值
+			      	var index = swiper.activeIndex;
+			      	
+			      	//根据索引值加载帖子信息
+			      	var post_like = numImg[index].node.edge_liked_by.count;
+			      	var post_comment = numImg[index].node.edge_media_to_comment.count;
+
+			      	//放大当前活动板块
+			      	$('.swiper-slide').not(':eq(index)').find("img").removeClass('addW');
+			      	$('.swiper-slide').eq(index).find("img").addClass('addW');
+			      	
+			      	//清空帖子信息内容
+			      	$("#post_like").html(post_like);
+			      	$("#post_comment").html(post_comment);
+			      }		     
+			 });
+	    	//第一个图片放大
+	    	$('.swiper-slide').eq(0).find("img").addClass('addW');
+	    }else{
+	    	$('.swiper-container').css("display","none");
+	    	$('#openPopover').css("display","block");
 	    }
 	    
 	    //开启弹出框
@@ -259,6 +338,7 @@
 	        //indicators: false, //是否显示滚动条,默认是true
 	    }); 
 	    })(mui);
+	    
 	    
 	    //获取数据
         mui('.mb').on('tap','.mui-btn',function(){
@@ -307,11 +387,6 @@
 				       }
 		      })
 		})
-        
-        //解决a链接无法跳转，实现点击跳转页面
-        mui('body').on('tap','a',function(){
-		    window.top.location.href=this.href;
-		});
 	})
     </script>
 </html>
