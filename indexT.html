@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta content="telephone=no" name="format-detection"/>
+		<title>移动app</title>
+		<style>
+			.box{
+				margin: 0 auto;
+				width:2rem;
+				height:1rem;
+				font-size: 0.16rem;
+				background:#ff0;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">hello world</div>
+	</body>
+	<script src="js/puplic.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>-->
+	<!--<script src="js/sha1.js" type="text/javascript" charset="utf-8"></script>-->
+	<script type="text/javascript">
+		var BASE_URL = "https://api.xsolla.com/merchant/merchants/39735/token";
+		var TOKEN = '3d8766fbea67ce310c33a3c70dadd642a928245c';
+		var obj = {
+				"purchase":{
+					"checkout":{
+					"amount":19.99,
+					"currency":"USD"
+				           },
+				"description":{
+				"value":"300Followers"
+				    }
+				},
+				"settings":{
+				"external_id":"201806269879556",
+				"language":"en",
+				"mode":"sandbox",
+				"project_id":28069
+				   },
+				"user":{
+				"email":{
+				"value":""
+				   },
+				"id":{
+				"value":"15949087",
+				"hidden":true
+				   },
+				"name":{
+				"value":"15949087"
+				   }
+				}
+				}
+		var str = JSON.stringify(obj);
+		console.log(str);
+		var merchant_api_key = 'pk6rQq1Wd15muGRm';
+		 //var sha = hex_sha1('3d8766fbea67ce310c33a3c70dadd642a928245c7201895616victorafra551.030com.fastboom.commenter.android')
+		 //alert(sha);
+		 $.ajax({
+		 	  contentType: 'application/json;charset=UTF-8',
+		      type: "POST",
+		      url: "https://api.xsolla.com/merchant/merchants/39735/token",
+		      data: str, //请求体参数
+		      //dataType: "json",
+		      headers: {
+		      	Authorization: 'Basic Mzk3MzU6cGs2clFxMVdkMTVtdUdSbQ==',
+		      	Accept: "application/json; charset=utf-8"
+		      	},
+		      beforeSend: function(request) {
+		      	//request.setRequestHeader("Authorization", "Basic Mzk3MzU6cGs2clFxMVdkMTVtdUdSbQ==");
+		      },
+		      success: function(data) {
+		      	var dataStr = JSON.stringify(data);
+		      	console.log(data);
+		      },
+		      error: function(err) {
+		      	console.log(err);
+		      },
+		      complete: function(XMLHttpRequest, status) { 
+		      	//请求完成后最终执行参数　
+		      }
+         })
+//      var ajax = new XMLHttpRequest();
+// 
+//      // 使用post请求
+//      ajax.open('post',BASE_URL);
+// 
+//      // 如果 使用post发送数据 必须 设置 如下内容
+//      // 修改了 发送给 服务器的 请求报文的 内容
+//      // 如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中规定您希望发送的数据：
+//      ajax.setRequestHeader("Content-type","application/json;charset=UTF-8");
+//      ajax.setRequestHeader("Authorization","Basic Mzk3MzU6cGs2clFxMVdkMTVtdUdSbQ==");
+//      // 发送
+//      // post请求 发送的数据 写在 send方法中
+//      // 格式 name=jack&age=18 字符串的格式
+//      ajax.send(str);
+// 
+//      // 注册事件
+//      ajax.onreadystatechange = function () {
+//          if (ajax.readyState==4&&ajax.status==200) {
+//              console.log(ajax.responseText);
+//          }
+//      }
+</script>
+</html>
