@@ -1,7 +1,7 @@
 /* get likes 模块 */
 .postBox{
 	width:100%;
-	display: flex;
+	display: none;
 	flex-flow:column;
 	justify-content: center;
 	align-items: center;

@@ -28,7 +28,7 @@ function loaddingAjax(){
           			var costTotal = dataM.items[i].costTotal;
           			
           			//创建节点
-          			var div = '<div style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_75.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
+          			var div = '<div class="load_data" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_75.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
           			itemCount+'</span></div><div>$'+costTotal+'</div></div>';
           			$(".load_follower").append(div);
           			//console.log(dataM.items[i].itemCount);
@@ -53,7 +53,7 @@ function Gfollowers(){
   			var itemCount = data.items[i].itemCount;
   			var costTotal = data.items[i].costTotal;
   			//创建节点
-  			var div = '<div style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_76.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
+  			var div = '<div class="load_data" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_76.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
   			itemCount+'</span></div><div>$'+costTotal+'</div></div>';
   			$(".load_follower").append(div);
   		}
@@ -68,7 +68,7 @@ function Mfollowers(){
   			var itemCount = data.items[i].itemCount;
   			var costTotal = data.items[i].costTotal;
   			//创建节点
-  			var div = '<div style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_75.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
+  			var div = '<div class="load_data" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_75.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
   			itemCount+'</span></div><div>$'+costTotal+'</div></div>';
   			$(".load_follower").append(div);
   		}
@@ -98,9 +98,21 @@ function Mlikes(){
   			var itemCount = data.items[i].itemCount;
   			var costTotal = data.items[i].costTotal;
   			//创建节点
-  			var div = '<div style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_75.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
+  			var div = '<div class="load_data" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;"><div><span><img src="img/b_like_75.png" style="width:0.16rem;display: inline;"/> x </span><span>'+
   			itemCount+'</span></div><div>$'+costTotal+'</div></div>';
   			$(".load_follower").append(div);
   		}
   	}
+}
+function noFollowVip(){
+	var data = JSON.parse(localStorage.getItem('load_follower'));
+	console.log(data);
+	var arr = [];
+	for(var i=0;i<data.items.length;i++){
+  		if(data.items[i].itemType == "follow_vip_weekly"){
+  			//服务器获取数据
+  			arr.push(data.items[i]);
+  		}
+  	}
+	return arr;
 }

@@ -206,15 +206,15 @@
       </div>
     </div>
     <footer>
-    	<a class="middle" href="">
+    	<a class="middle" href="index.html">
     		<img src="img/b_like_13.png" style="width:0.2rem;display: block;" />
     		<span>Get Followers</span>
     	</a>
-    	<a class="middle" href="">
+    	<a class="middle" href="getLikes.html">
     		<img src="img/b_like_82.png" style="width:0.2rem;display: block;" />
     		<span>Get Likes</span>
     	</a>
-    	<a class="middle" href="">
+    	<a class="middle" href="vip.html">
     		<img src="img/b_like_12.png" style="width:0.2rem;display: block;" />
     		<span>VIP</span>
        </a>
@@ -268,9 +268,13 @@
 	    if(data){
 	    	//展示数据
 	    	$('.swiper-container').css("display","block");
+	    	$('.postBox').css("display","flex");
 	    	$('#openPopover').css("display","none");
+	    	
 	    	var numImg = data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges;
-	    	var imgSrc = numImg[0].node.display_resources[0].src;
+	    	console.log(numImg);
+	    	var imgSrc = numImg[0].node.display_url;
+	    	
 	    	var post_like = numImg[0].node.edge_liked_by.count;
 	    	var post_comment = numImg[0].node.edge_media_to_comment.count;
 		    var userName = data.entry_data.ProfilePage[0].graphql.user.username;
@@ -284,7 +288,7 @@
 	        
 	        //循环创建图片节点
 	        for (var i = 0;i < numImg.length;i++) {
-	        	var imgSrc = numImg[i].node.display_resources[0].src;
+	        	var imgSrc = numImg[i].node.display_url;
 	        	var slide = '<div class="swiper-slide"><img src="'+imgSrc+'" class="smallW"/></div>';
 	        	
 	        	//动态添加发帖信息
@@ -317,6 +321,7 @@
 	    	$('.swiper-slide').eq(0).find("img").addClass('addW');
 	    }else{
 	    	$('.swiper-container').css("display","none");
+	    	$('.postBox').css("display","none");
 	    	$('#openPopover').css("display","block");
 	    }
 	    
@@ -387,6 +392,11 @@
 				       }
 		      })
 		})
+        
+        //解决a链接无法跳转，实现点击跳转页面
+        mui('footer').on('tap','a',function(){
+		    window.top.location.href=this.href;
+		});
 	})
     </script>
 </html>

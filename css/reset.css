@@ -12,8 +12,12 @@ html {
     -webkit-tap-highlight-color: transparent;
     /* Most devs find border-box easier to reason about. However by inheriting we can mix box-sizing approaches.*/
     box-sizing: inherit;
+    padding:0;
+    margin:0;
 }
-
+ul,li{
+	list-style: none;
+}
 *:before,
 *:after {
     box-sizing: inherit;
@@ -138,3 +142,4 @@ img {
 .smallTxt{
 	font-size: 0.12rem;
 }
+

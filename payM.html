@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			html,body{
+				background:#f5f5f8;
+			}
+			p{
+				margin:0;
+				padding:0;
+			}
+			.mui-bar{
+				color:#fff;
+				background:#6273f4;
+			}
+			.mui-bar a{
+				color:#fff;
+			}
+			.mui-title{
+				color:#fff;
+			}
+			.mui-checkbox input[type=checkbox]{
+				top:auto;
+			}	
+			.payUserInfo{
+				width:100%;
+				height:0.74rem;
+				display: flex;
+				justify-content: space-between;
+				padding: 0 0.16rem;
+				align-items: center;
+				font-size: 0.14rem;
+				background:#fff;
+			}
+			.payUserInfoL{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.payUserImg{
+				width:0.4rem;
+				height:0.4rem;
+				border-radius: 50%;
+				margin-right:0.05rem;
+			}
+			.choosePay{
+				width:100%;
+				height:0.44rem;
+				line-height: 0.44rem;
+				font-size: 0.12rem;
+				color:#86899a;
+				padding-left:0.16rem;
+				text-align: left;
+			}
+			.payAction{
+				width:100%;
+				background:#fff;
+			}
+			.payXsolla{
+				width:100%;
+				padding:0 0.16rem;
+				height:0.74rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				border-bottom: 1px solid #e9ecf1;
+			}
+			.payXsollaL{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.recomendPay{
+				color:#000000;
+				font-size: 0.18rem;
+				font-weight: bold;
+			}
+			.footer{
+				width:100%;
+				height:0.6rem;
+				background:#6273f4;
+				position: fixed;
+				left:0;
+				bottom: 0;
+				color:#fff;
+				font-weight:bold;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">Pay Bill</h1>
+		</header>
+		<div class="mui-content">
+		    <div class="payUserInfo">
+				<div class="payUserInfoL">
+					<div><img class="payUserImg" src="img/b_like_35.png"/></div>
+					<p class="payProduct middleTxt">100Followers</p>
+				</div>
+				<p class="payPrice middleTxt">$9.99</p>
+		   </div>
+		   <div class="choosePay">Choose a Way to Pay</div>
+		   	<div class="payAction">
+		   		<div class="mui-input-row mui-checkbox payXsolla">
+				  <div class="payXsollaL">
+		   			<div><img style="width:0.44rem;padding-right: 0.1rem;" src="img/f_icon_17.png"/></div>
+		   			<div>
+		   				<div style="display: flex;">
+		   					<span class="recomendPay">推荐支付</span>
+		   				    <span style="color:#ff4949;font-size: 0.09rem;margin-left:0.05rem">Recomend</span>
+		   				</div>
+		   				<p class="smallTxt">Safe, Fast & Max, Discount</p>
+		   			</div>
+		   		   </div>
+				  <input id="checkbox1" type="checkbox" checked>
+				</div>
+				<div class="mui-input-row mui-checkbox payXsolla">
+				  <div class="payXsollaL">
+		   			<div><img style="width:0.44rem;padding-right: 0.1rem;" src="img/f_icon_12.png"/></div>
+		   				<p class="nomal_txt">Google Payment</p>
+		   		   </div>
+				  <input id="checkbox2" type="checkbox">
+				</div>
+		   		
+		   	</div>
+		</div>
+	    <button class="footer" data-xpaystation-widget-open>Pay Now</button>
+		
+	</body>
+    <script src="js/mui.min.js"></script>
+	<script src="js/puplic.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/sha1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/payAjax.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.init();
+		mui.ready(function(){
+			var ACCESS_TOKEN = pay();
+            console.log(ACCESS_TOKEN);
+            console.log($('.payAction').find('input[type=checkbox]'));
+            //控制选项支付
+			$('.payAction').find('input[type=checkbox]').on('click', function(){
+				$(this).prop("checked", true);
+				$('.payAction').find('input[type=checkbox]').not(this).prop("checked", false);
+			});
+
+			var options = {
+		       access_token: ACCESS_TOKEN, //TODO use access token, received on previous step
+		       sandbox: true //TODO please do not forget to remove this setting when going live
+		   };
+		   var s = document.createElement('script');
+		   s.type = "text/javascript";
+		   s.async = true;
+		   s.src = "https://static.xsolla.com/embed/paystation/1.0.7/widget.min.js";
+		   s.addEventListener('load', function (e) {
+		       XPayStationWidget.init(options);
+		   }, false);
+		   var head = document.getElementsByTagName('head')[0];
+		   head.appendChild(s);
+		})
+	</script>
+</html>
