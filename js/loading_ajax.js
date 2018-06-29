@@ -61,7 +61,7 @@ function insData(){
 	          method: "GET",
 	          url: LOGIN_URL,
 	          dataType: "html",
-	          async:false,
+	          //async:false,
 	          beforeSend: function(xhr) {
 	          	//出现加载动画
 	          	$(".load_img").css("display","block");

@@ -135,7 +135,7 @@
 						<span class="big_txt follower_count  white"></span>
 						<span class="smallTxt white"></span>
 				</div>-->
-				<a href="#popover" id="openPopover"><img id="user_imgUrl" src="img/b_like_35.png"/></a>
+				<a href="#popover" class="nomalImg" id="openPopover"><img id="user_imgUrl" src="img/b_like_35.png"/></a>
 				<!--<div class="following">
 						<span class="big_txt following_count white"></span>
 						<span class="smallTxt white"></span>
@@ -280,14 +280,15 @@
 
 		//加载本地数据
 		var data = JSON.parse(localStorage.getItem('data'));
-	    //console.log(data);
+	    console.log(data);
 	    
 	    //获取数据
 	    if(data){
+	    	alert(111);
 	    	//展示数据
 	    	$('.swiper-container').css("display","block");
 	    	$('.postBox').css("display","flex");
-	    	$('#openPopover').css("display","none");
+	    	$('.nomalImg').css("display","none");
 	    	
 	    	var numImg = data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges;
 	    	console.log(numImg);
@@ -340,7 +341,7 @@
 	    }else{
 	    	$('.swiper-container').css("display","none");
 	    	$('.postBox').css("display","none");
-	    	$('#openPopover').css("display","block");
+	    	$('.nomalImg').css("display","block");
 	    }
 	    
 	    //开启弹出框
@@ -365,50 +366,7 @@
 	    
 	    //获取数据
         mui('.mb').on('tap','.mui-btn',function(){
-	  		 var txt = document.getElementById('txt').value;
-	  		 var BASE_URL = 'https://www.instagram.com/';
-			 var LOGIN_URL = BASE_URL + txt + '/';
-			 $.ajax({
-				          method: "GET",
-				          url: LOGIN_URL,
-				          dataType: "html",
-				          beforeSend: function(xhr) {
-				          	//出现加载动画
-				          	$(".load_img").css("display","block");
-				           },
-				          //cache: false,
-				          success: function(data) {
-				          	//蒙层消失
-				          	mui('#popover').popover('toggle');
-				          	
-				          	//数据处理
-				          	var dataStr = JSON.stringify(data);
-							var datarep = dataStr.replace(/(\r\n)|(\n)/g,"");
-							var n = datarep.match(/(window._sharedData\s?)(=\s?)(.*?);<\/script>/)[3];
-							n = n.replace(/\\/g,"");
-							var jsonStr = JSON.parse(n);
-							var img_url = jsonStr.entry_data.ProfilePage[0].graphql.user.profile_pic_url;
-							localStorage.setItem('data', n);
-							
-							//打开新页面
-				          	mui.openWindow({
-				          		url:'accountConfirm.html',
-				          		id:'accountConfirm',
-                                styles:{
-                                    top:'0px',
-                                    bottom:'0px'
-                                },
-								extras:{}
-				          	})
-				          },
-				          error: function(err) {
-				          	$(".load_img").css("display","none");
-				          	$('.warn').css('display','block');
-				          },
-				          complete: function(XMLHttpRequest, status) {
-				          	//请求完成后最终执行参数 	　
-				       }
-		      })
+	  		 insData();
 		})
         
         //解决a链接无法跳转，实现点击跳转页面
