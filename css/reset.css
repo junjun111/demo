@@ -111,14 +111,25 @@ img {
     /*Make images display as a block (UA default is usually inline)*/
     display: block;
 }
+.flex{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 .white{
 	color:#fff;
 }
 .black{
 	color:#3e454f;
 }
+.cornflower{
+	color:#6273f4;
+}
 .block{
 	display: block;
+}
+.none{
+	display: none;
 }
 .inline{
 	display: inline;

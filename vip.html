@@ -155,6 +155,17 @@
              <h1 class="mui-title">Setting</h1>
          </header>
          <ul class="mui-table-view" style="top:0.44rem;">
+         	     <a href="#popover" id="openPopover">
+         	     	<li class="mui-table-view-cell mui-action-menu userInfoBg" >
+         	     		<div class="flex">
+         	     			<div class="asideUserImg flex">
+		                 		<img class="asideImg" src="img/b_like_60.png" style="width:0.4rem;border-radius:50%;margin-right:0.05rem"/>
+		                 		<span class="asideUserName">Add Account</span>
+	                 	    </div>
+	                        <a class="mui-icon mui-icon-checkmarkempty asideIcontrue"></a>
+         	     		</div>
+                    </li>
+         	    </a>
                  <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;align-items: center;">
                  	<div>
                  		<img src="img/like_bu_49@3x.png" style="width:0.2rem;display: inline;"/>
@@ -179,14 +190,21 @@
                  <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;align-items: center;">
                  	<div>
                  		<img src="img/like_bu_49@3x.png" style="width:0.2rem;display: inline;"/>
-                 		<span>Store</span>
+                 		<span>like Our Facebook page</span>
                  	</div>
                      <a class="mui-navigate-right"></a>
                  </li>
                  <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;align-items: center;">
                  	<div>
                  		<img src="img/like_bu_49@3x.png" style="width:0.2rem;display: inline;"/>
-                 		<span>Store</span>
+                 		<span>Invite friend</span>
+                 	</div>
+                     <a class="mui-navigate-right"></a>
+                 </li>
+                 <li class="mui-table-view-cell flex loginOut" >
+                 	<div class="flex">
+                 		<img src="img/b_like_65.png" style="width:0.2rem;margin-right:0.05rem"/>
+                 		<span>Log Out</span>
                  	</div>
                      <a class="mui-navigate-right"></a>
                  </li>
@@ -312,7 +330,6 @@
 		});
 	mui.ready(function(){
 		//加载数据
-		vipAjax();
 		followVip();
 //		//金额vip变动  先复制
 //		var arr = followerVip();

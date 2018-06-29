@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />-->
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
     <link href="css/mui.css" rel="stylesheet"/>
@@ -34,6 +34,17 @@
              <h1 class="mui-title">Setting</h1>
          </header>
          <ul class="mui-table-view" style="top:0.44rem;">
+         	     <a href="#popover" id="openPopover">
+         	     	<li class="mui-table-view-cell mui-action-menu userInfoBg" >
+         	     		<div class="flex">
+         	     			<div class="asideUserImg flex">
+		                 		<img class="asideImg" src="img/b_like_60.png" style="width:0.4rem;border-radius:50%;margin-right:0.05rem"/>
+		                 		<span class="asideUserName">Add Account</span>
+	                 	    </div>
+	                        <a class="mui-icon mui-icon-checkmarkempty asideIcontrue"></a>
+         	     		</div>
+                    </li>
+         	    </a>
                  <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;align-items: center;">
                  	<div>
                  		<img src="img/like_bu_49@3x.png" style="width:0.2rem;display: inline;"/>
@@ -58,14 +69,21 @@
                  <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;align-items: center;">
                  	<div>
                  		<img src="img/like_bu_49@3x.png" style="width:0.2rem;display: inline;"/>
-                 		<span>Store</span>
+                 		<span>like Our Facebook page</span>
                  	</div>
                      <a class="mui-navigate-right"></a>
                  </li>
                  <li class="mui-table-view-cell" style="display: flex;justify-content: space-between;align-items: center;">
                  	<div>
                  		<img src="img/like_bu_49@3x.png" style="width:0.2rem;display: inline;"/>
-                 		<span>Store</span>
+                 		<span>Invite friend</span>
+                 	</div>
+                     <a class="mui-navigate-right"></a>
+                 </li>
+                 <li class="mui-table-view-cell flex loginOut" >
+                 	<div class="flex">
+                 		<img src="img/b_like_65.png" style="width:0.2rem;margin-right:0.05rem"/>
+                 		<span>Log Out</span>
                  	</div>
                      <a class="mui-navigate-right"></a>
                  </li>
@@ -121,41 +139,6 @@
 	    				<span> x 10</span>
 	    			</div>
 	    			<div>$30.00</div>
-	    		</div>
-	    		<div class="" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;">
-	    			<div>
-	    				<span><img src="img/b_like_18.png" style="width:0.16rem;display: inline;"/></span>
-	    				<span> x 100</span>
-	    			</div>
-	    			<div>$30.00</div>
-	    		</div>
-	    		<div class="" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;">
-	    			<div>
-	    				<span><img src="img/b_like_18.png" style="width:0.16rem;display: inline;"/></span>
-	    				<span> x 300</span>
-	    			</div>
-	    			<div>$30.00</div>
-	    		</div>
-	    		<div class="" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;">
-	    			<div>
-	    				<span><img src="img/b_like_18.png" style="width:0.16rem;display: inline;"/></span>
-	    				<span> x 800</span>
-	    			</div>
-	    			<div>$30.00</div>
-	    		</div>
-	    		<div class="" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;">
-	    			<div>
-	    				<span><img src="img/b_like_18.png" style="width:0.16rem;display: inline;"/></span>
-	    				<span> x 2500</span>
-	    			</div>
-	    			<div>$30.00</div>
-	    		</div>
-	    		<div class="" style="width:100%;height:0.6rem;display: flex;justify-content: space-around;align-items: center;">
-	    			<div>
-	    				<span><img src="img/b_like_18.png" style="width:0.16rem;display: inline;"/></span>
-	    				<span> x 5000</span>
-	    			</div>
-	    			<div>$30.00</div>
 	    		</div>-->
 	    	</div>
 	    </div>
@@ -201,18 +184,17 @@
 <script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/puplic.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/sha1.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/loading_ajax.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/session.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
     mui.init({
 			swipeBack: false,
 		});
 	mui.ready(function(){
-
-		 //load_follower添加事件
-	    $(".load_follower").on("click",".load_data",function(){
-	    	//alert(111);
-    	    location.href = './payM.html';
-	    })
+        //获取session数据
+         session();
+         
 		//先清空在加载
    		$(".load_follower").html("");
 		//加载服务器数据
@@ -229,6 +211,11 @@
 	    $(".load_follower").html("");
 	  	Mfollowers();
 	  })
+	  
+//	  $(".load_follower").on("click",".load_data",function(){
+//	  	var upCost = $(this).find(".upCost").html();
+//	    console.log(upCost);
+//	  })
 		//加载本地数据
 		var data = JSON.parse(localStorage.getItem('data'));
 	    console.log(data);
@@ -243,20 +230,32 @@
 			
 			//页面赋值，加载用户信息
 			$(".userName").html(userName);
+			$(".asideUserName").html(userName);
 			$('#user_imgUrl').attr("src",img_url);
+			$(".asideImg").attr("src",img_url);
 			$(".follower_count").html(followers);
 	        $(".following_count").html(following);
+	        
+	        //显示侧边栏user icon
+	        $(".asideIcontrue").show();
+	        
 	    }
 	    
-	    //开启弹出框
-		mui('#header').on('tap','.mui-action-menu',function(){
-  	  	  mui('.mui-off-canvas-wrap').offCanvas().show();
+	    //侧边栏显示隐藏
+		mui(document).on('tap','.mui-action-menu',function(){
+  	  	  mui('.mui-off-canvas-wrap').offCanvas().toggle();
 		});
 		
-		//关闭弹出框
+		//弹出框显示隐藏
 		mui('.mb').on('tap','.img_close',function(){
 			mui('#popover').popover('toggle');
 	  		//document.getElementsByClassName('mb')[0].style.display = 'none';
+		});
+		
+		//点击清除本地ins信息
+		mui("aside").on('tap','.loginOut',function(){
+  	  	  localStorage.removeItem("data");
+  	  	  window.location.reload();
 		});
 		
 		//页面滚动
@@ -269,53 +268,18 @@
 	    
 	    //获取数据
         mui('.mb').on('tap','.mui-btn',function(){
-	  		 var txt = document.getElementById('txt').value;
-	  		 var BASE_URL = 'https://www.instagram.com/';
-			 var LOGIN_URL = BASE_URL + txt + '/';
-			 $.ajax({
-				          method: "GET",
-				          url: LOGIN_URL,
-				          dataType: "html",
-				          beforeSend: function(xhr) {
-				          	//出现加载动画
-				          	$(".load_img").css("display","block");
-				           },
-				          //cache: false,
-				          success: function(data) {
-				          	//蒙层消失
-				          	mui('#popover').popover('toggle');
-				          	
-				          	//数据处理
-				          	var dataStr = JSON.stringify(data);
-							var datarep = dataStr.replace(/(\r\n)|(\n)/g,"");
-							var n = datarep.match(/(window._sharedData\s?)(=\s?)(.*?);<\/script>/)[3];
-							n = n.replace(/\\/g,"");
-							var jsonStr = JSON.parse(n);
-							var img_url = jsonStr.entry_data.ProfilePage[0].graphql.user.profile_pic_url;
-							localStorage.setItem('data', n);
-							
-							//打开新页面
-				          	mui.openWindow({
-				          		url:'accountConfirm.html',
-				          		id:'accountConfirm',
-                                styles:{
-                                    top:'0px',
-                                    bottom:'0px'
-                                },
-								extras:{}
-				          	})
-				          },
-				          error: function(err) {
-				          	$(".load_img").css("display","none");
-				          	$('.warn').css('display','block');
-				          },
-				          complete: function(XMLHttpRequest, status) {
-				          	//请求完成后最终执行参数 	　
-				       }
-		      })
+
+			 insData();
 		})
         
         //解决a链接无法跳转，实现点击跳转页面
+        mui('.load_follower').on('tap','a',function(){
+        	//var upCost = $(this).find(".upCost").html();
+        	var index = $(this).attr("index");
+        	localStorage.setItem('index', index);
+	        console.log(index);
+		    window.top.location.href='payM.html';
+		});
         mui('footer').on('tap','a',function(){
 		    window.top.location.href=this.href;
 		});
